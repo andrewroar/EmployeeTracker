@@ -1,28 +1,23 @@
 const inquirer = require("inquirer");
-const Intern = require("../lib/Intern");
+const Employee = require("../lib/Employee");
 const fs = require("fs");
-const InternTemplate = require("../templates/InternTemplate");
+const EmployeeTemplate = require("../templates/EmployeeTemplate");
 
 questions = [
   {
     type: "input",
     name: "name",
-    message: "Enter Intern's name:",
+    message: "Enter Employee's name: ",
   },
   {
     type: "input",
     name: "id",
-    message: "Enter Intern's id: ",
+    message: "Enter Employee's id: ",
   },
   {
     type: "input",
     name: "email",
-    message: "Enter Intern's email: ",
-  },
-  {
-    type: "input",
-    name: "school",
-    message: "Enter Intern's school:",
+    message: "Enter Employee's email: ",
   },
   {
     type: "confirm",
@@ -34,7 +29,7 @@ questions = [
 
 ///////////
 
-function appendIntern(userInfo) {
+function appendEmployee(userInfo) {
   return `      
   <div class="container-fluid">
   <div class="row">
@@ -49,59 +44,48 @@ function appendIntern(userInfo) {
           User ID: ${userInfo.id}
           
           User Email: ${userInfo.email}
-
-          User School: ${userInfo.school}
       </div>
   </div>
 </div>`;
 }
 
-function wrappingUpHTML() {
+let wrappingUpHTML = function () {
   return `
   </body>
   
   </html>
   `;
-}
+};
 
-///////////If User do not wish to add a new Intern, continue will be false
+///////////If User do not wish to add a new employee, continue will be false
 let constinue = true;
-let IsInternHTMLExist = false;
+let IsEmployeeHTMLExist = false;
 ////////////
-const generateHTMLIntern = () => {
+const generateHTMLEmployee = () => {
   inquirer
     .prompt(questions)
     .then((respond) => {
-      const userInfo = new Intern(
-        respond.name,
-        respond.id,
-        respond.email,
-        respond.school
-      );
+      const userInfo = new Employee(respond.name, respond.id, respond.email);
       constinue = respond.again;
 
       return userInfo;
     })
     .then((userInfo) => {
-      console.log(userInfo.name);
-      if (!IsInternHTMLExist) {
-        fs.writeFile("../Intern.html", InternTemplate(userInfo), (err) => {
+      if (!IsEmployeeHTMLExist) {
+        fs.writeFile("../Employee.html", EmployeeTemplate(userInfo), (err) => {
           if (err) {
             return console.log(err);
           }
-          IsInternHTMLExist = true;
         });
-        console.log(constinue);
+        IsEngineerHTMLExist = true;
       } else {
-        fs.appendFileSync("../Intern.html", appendIntern(userInfo));
+        fs.appendFileSync("../Employee.html", appendEmployee(userInfo));
       }
 
       if (constinue) {
-        generateHTMLIntern();
+        generateHTMLEmployee();
       } else {
-        fs.appendFileSync("../Intern.html", wrappingUpHTML());
+        fs.appendFileSync("../Employee.html", wrappingUpHTML());
       }
     });
 };
-
-generateHTMLIntern();

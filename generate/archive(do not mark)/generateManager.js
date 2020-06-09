@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
-const Manager = require("../lib/Manager");
+const Manager = require("../../lib/Manager");
 const fs = require("fs");
-const ManagerTemplate = require("../templates/ManagerTemplate");
+const ManagerTemplate = require("../../templates/ManagerTemplate");
 
 questions = [
   {
@@ -83,24 +83,23 @@ const generateHTMLManager = () => {
       return userInfo;
     })
     .then((userInfo) => {
-      console.log(userInfo.name);
       if (!IsManagerHTMLExist) {
-        fs.writeFile("../Manager.html", ManagerTemplate(userInfo), (err) => {
+        fs.writeFile("../index.html", ManagerTemplate(userInfo), (err) => {
           if (err) {
             return console.log(err);
           }
-          IsManagerHTMLExist = true;
+          IsEngineerHTMLExist = true;
         });
       } else {
-        fs.appendFileSync("../Manager.html", appendManager(userInfo));
+        fs.appendFileSync("../index.html", appendManager(userInfo));
       }
 
       if (constinue) {
         generateHTMLManager();
       } else {
-        fs.appendFileSync("../Manager.html", wrappingUpHTML());
+        fs.appendFileSync("../index.html", wrappingUpHTML());
       }
     });
 };
 
-generateHTMLManager();
+module.exports = generateHTMLManager();

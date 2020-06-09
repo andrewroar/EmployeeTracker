@@ -56,13 +56,13 @@ function appendEngineer(userInfo) {
   </div>`;
 }
 
-function wrappingUpHTML() {
+let wrappingUpHTML = function () {
   return `
     </body>
     
     </html>
     `;
-}
+};
 
 ///////////If User do not wish to add a new engineer, continue will be false
 let constinue = true;
@@ -83,24 +83,24 @@ const generateHTMLEngineer = () => {
       return userInfo;
     })
     .then((userInfo) => {
-      console.log(userInfo.name);
       if (!IsEngineerHTMLExist) {
-        fs.writeFile("../Engineer.html", EngineerTemplate(userInfo), (err) => {
+        IsEngineerHTMLExist = true;
+        fs.writeFile("../index.html", EngineerTemplate(userInfo), (err) => {
           if (err) {
             return console.log(err);
           }
           IsEngineerHTMLExist = true;
         });
       } else {
-        fs.appendFileSync("../Engineer.html", appendEngineer(userInfo));
+        fs.appendFileSync("../index.html", appendEngineer(userInfo));
       }
 
       if (constinue) {
         generateHTMLEngineer();
       } else {
-        fs.appendFileSync("../Engineer.html", wrappingUpHTML());
+        fs.appendFileSync("../index.html", wrappingUpHTML());
       }
     });
 };
 
-generateHTMLEngineer();
+module.exports = generateHTMLEngineer();

@@ -31,9 +31,7 @@ function EmployeeTemplate(userInfo) {
               </div>
           </div>
       </div>
-  </body>
-  
-  </html>
+
     `;
 }
 

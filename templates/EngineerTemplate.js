@@ -33,9 +33,7 @@ function ManagerTemplate(userInfo) {
                   </div>
               </div>
           </div>
-      </body>
-      
-      </html>
+
         `;
 }
 

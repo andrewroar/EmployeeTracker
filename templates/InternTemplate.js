@@ -33,9 +33,9 @@ function InternTemplate(userInfo) {
                   </div>
               </div>
           </div>
-      </body>
       
-      </html>
+      
+      
         `;
 }
 

@@ -6,11 +6,13 @@ By prompting a list of question, you can generate a html for your employee/manag
 
 ## Method
 
-To generate the html, open the "generate" folder. the JS starting generate their respective employee using the template in the template folder
+To generate the html, open the "generate" folder. the index.js starting generate their respective employee using the template in the template folder
 
-"IsXXXXHTMLExist" see if there is already a HTML. For the first prompt, it will generate a html using the template. If we are adding more than 1 user to the html, it will append it the html instead of creating a new one.
+The first question is what is the position of the category, once the category is identified, it will run the function to create or append the employee to the index.html according to the information provided. All four function (createEmployee,createManager,createIntern, createEngineer) is basically the same with small twist to fit the requirement.
 
-I put two variable to control the process. "constinue" determine whether the user want to add another user, As long as this is true, the program will keep prompting questions and append it to the html. When "constinue" is false, the program will wrap up the html.
+## User Story
+
+While generating the html with inquirer and fs is easy, the tricky part is to combine all four of them in one script. I originally tried to use export.module and request but after trying for an hour I failed to do so. I should add classes to the template so I can append new user more easily but given the time avaliable for me, I cannot achieve that at the moment
 
 ## Test
 
